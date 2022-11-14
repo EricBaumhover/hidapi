@@ -68,7 +68,7 @@ jobs:
     - name: Gather artifacts
       run: |
         mkdir artifacts
-        cp "install/shared/lib/libhidapi.dylib" -Destination "artifacts"
+        cp "install/shared/lib/libhidapi.dylib" "artifacts"
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -120,7 +120,8 @@ jobs:
     - name: Gather artifacts
       run: |
         mkdir artifacts
-        cp "install/shared/lib/libhidapi-libusb.so","install/shared/lib/libhidapi-hidraw.so" -Destination "artifacts"
+        cp "install/shared/lib/libhidapi-libusb.so" " "artifacts"
+        cp "install/shared/lib/libhidapi-hidraw.so" "artifacts"
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
