@@ -67,7 +67,7 @@ jobs:
         ninja
     - name: Gather artifacts
       run: |
-        md artifacts
+        mkdir artifacts
         Copy-Item "install/shared/lib/libhidapi.dylib" -Destination "artifacts"
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
@@ -119,7 +119,7 @@ jobs:
         ninja
     - name: Gather artifacts
       run: |
-        md artifacts
+        mkdir artifacts
         Copy-Item "install/shared/lib/libhidapi-libusb.so","install/shared/lib/libhidapi-hidraw.so" -Destination "artifacts"
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
