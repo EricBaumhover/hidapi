@@ -65,6 +65,16 @@ jobs:
         meson setup build_meson hidapisrc
         cd build_meson
         ninja
+    - name: Gather artifacts
+      run: |
+        md artifacts
+        Copy-Item "install/shared/lib/libhidapi.dylib" -Destination "artifacts"
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: hidapi-mac
+        path: artifacts/
+        retention-days: ${{ (github.event_name == 'pull_request' || github.ref_name != 'master') && 7 || 90 }}
 
   ubuntu-cmake:
 
@@ -107,6 +117,16 @@ jobs:
         meson setup build_meson hidapisrc
         cd build_meson
         ninja
+    - name: Gather artifacts
+      run: |
+        md artifacts
+        Copy-Item "install/shared/lib/libhidapi-libusb.so","install/shared/lib/libhidapi-hidraw.so" -Destination "artifacts"
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: hidapi-linux
+        path: artifacts/
+        retention-days: ${{ (github.event_name == 'pull_request' || github.ref_name != 'master') && 7 || 90 }}
 
   windows-cmake:
 
