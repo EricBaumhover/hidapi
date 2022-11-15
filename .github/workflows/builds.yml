@@ -105,32 +105,32 @@ jobs:
             
           run: |
             rm -rf build install
-            cmake -B build/shared -S . -DCMAKE_INSTALL_PREFIX=install/shared -DHIDAPI_BUILD_HIDTEST=ON
+            cmake -B build/shared -S . -DCMAKE_INSTALL_PREFIX=install/shared
             make install
             meson setup build_meson .
             cd build_meson
             ninja
-            cp "subprojects/hidapi_build_cmake/libhidapi_libusb.so" "/artifacts/libhidapi-libusb.so"
-            cp "subprojects/hidapi_build_cmake/libhidapi_hidraw.so" "/artifacts/libhidapi-hidraw.so"
+            cp "subprojects/hidapi_build_cmake/libhidapi_libusb.so" "/artifacts/libhidapi_libusb.so"
+            cp "subprojects/hidapi_build_cmake/libhidapi_hidraw.so" "/artifacts/libhidapi_hidraw.so"
             
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
         run: |
           echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: hidapi-linux-aarch64
-          path: artifacts/
-          retention-days: ${{ (github.event_name == 'pull_request' || github.ref_name != 'master') && 7 || 90 }}
       - name: Check artifacts
         uses: andstor/file-existence-action@v1
         with:
           files: "${PWD}/artifacts/libhidapi_libusb.so, \
                   ${PWD}/artifacts/libhidapi_hidraw.so"
           allow_failure: true
-        
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: hidapi-linux-aarch64
+          path: artifacts/
+          retention-days: ${{ (github.event_name == 'pull_request' || github.ref_name != 'master') && 7 || 90 }}
+
   ubuntu-cmake-x64:
 
     runs-on: ubuntu-latest
