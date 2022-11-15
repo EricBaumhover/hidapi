@@ -111,7 +111,7 @@ jobs:
             cd build_meson
             ninja
             cp "subprojects/hidapi_build_cmake/libhidapi_libusb.so" "/artifacts/libhidapi-libusb.so"
-            cp "subprojects/hidapi_build_cmake/libhidapi_hidraw" "/artifacts/libhidapi-hidraw.so"
+            cp "subprojects/hidapi_build_cmake/libhidapi_hidraw.so" "/artifacts/libhidapi-hidraw.so"
             
 
       - name: Get the output
