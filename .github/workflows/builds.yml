@@ -111,8 +111,8 @@ jobs:
             meson setup build_meson .
             cd build_meson
             ninja
-            cp "install/shared/lib/libhidapi-libusb.so" "/artifacts/libhidapi-libusb.so"
-            cp "install/shared/lib/libhidapi-hidraw.so" "/artifacts/libhidapi-hidraw.so"
+            cp "subprojects/hidapi_build_cmake/libhidapi_libusb.so" "/artifacts/libhidapi-libusb.so"
+            cp "subprojects/hidapi_build_cmake/libhidapi_hidraw" "/artifacts/libhidapi-hidraw.so"
             
 
       - name: Get the output
@@ -122,8 +122,8 @@ jobs:
       - name: Check artifacts
         uses: andstor/file-existence-action@v1
         with:
-          files: "artifacts/libhidapi-libusb.so, \
-                  artifacts/libhidapi-hidraw.so"
+          files: "artifacts/libhidapi_libusb.so, \
+                  artifacts/libhidapi_hidraw.so"
           allow_failure: true
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
