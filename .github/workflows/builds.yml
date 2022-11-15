@@ -91,8 +91,6 @@ jobs:
           
           shell: /bin/sh
           
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          
           setup: |
             mkdir -p "${PWD}/artifacts"
 
