@@ -130,13 +130,13 @@ jobs:
         with:
           files: "artifacts/libhidapi-libusb.so, \
                   artifacts/libhidapi-hidraw.so"
-        allow_failure: true
+          allow_failure: true
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-        name: hidapi-linux-aarch64
-        path: artifacts/
-        retention-days: ${{ (github.event_name == 'pull_request' || github.ref_name != 'master') && 7 || 90 }}
+          name: hidapi-linux-aarch64
+          path: artifacts/
+          retention-days: ${{ (github.event_name == 'pull_request' || github.ref_name != 'master') && 7 || 90 }}
         
   ubuntu-cmake:
 
