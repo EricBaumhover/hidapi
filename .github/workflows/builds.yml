@@ -118,6 +118,12 @@ jobs:
         # Echo the `uname` output parameter from the `runcmd` step
         run: |
           echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
+      - name: Check artifacts
+        uses: andstor/file-existence-action@v1
+        with:
+          files:  "artifacts/libhidapi_hidraw.so, \
+                   artifacts/libudev.so"
+          allow_failure: true
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -125,12 +131,7 @@ jobs:
           path: artifacts/
           retention-days: ${{ (github.event_name == 'pull_request' || github.ref_name != 'master') && 7 || 90 }}
           
-      - name: Check artifacts
-        uses: andstor/file-existence-action@v1
-        with:
-          files:  "artifacts/libhidapi_hidraw.so"
-                  "artifacts/libudev.so"
-          allow_failure: true
+      
           
           
   ubuntu-cmake-x64:
