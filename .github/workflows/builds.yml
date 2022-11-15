@@ -76,60 +76,6 @@ jobs:
         path: artifacts/
         retention-days: ${{ (github.event_name == 'pull_request' || github.ref_name != 'master') && 7 || 90 }}
 
-
-  android-cmake-arm64:
-
-    runs-on: ubuntu-18.04
-    
-    steps:
-      - uses: actions/checkout@v2.1.0
-      - uses: uraimo/run-on-arch-action@v2
-        name: Run commands
-        id: runcmd
-        with:
-          arch: aarch64
-          distro: ubuntu18.04
-          
-          shell: /bin/sh
-          
-          setup: |
-            mkdir -p "${PWD}/artifacts"
-
-          dockerRunArgs: |
-            --volume "${PWD}/artifacts:/artifacts"
-            
-          install: |
-            apt-get update -q -y
-            apt-get install -q -y libudev-dev libusb-1.0-0-dev python3-pip ninja-build git cmake pkg-config
-            cd ~
-            pip3 install meson
-            
-          run: |
-            rm -rf build install
-            cmake -B build/shared -S android/jni -DCMAKE_INSTALL_PREFIX=install/shared
-            make install
-            meson setup build_meson .
-            cd build_meson
-            ninja
-            cp "subprojects/hidapi_build_cmake/libhidapi_libusb.so" "/artifacts/libhidapi_libusb.so"
-            
-
-      - name: Get the output
-        # Echo the `uname` output parameter from the `runcmd` step
-        run: |
-          echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: hidapi-android-arm64
-          path: artifacts/
-          retention-days: ${{ (github.event_name == 'pull_request' || github.ref_name != 'master') && 7 || 90 }}
-      - name: Check artifacts
-        uses: andstor/file-existence-action@v1
-        with:
-          files: "artifacts/libhidapi_libusb.so"
-          allow_failure: true
-
   ubuntu-cmake-arm64:
 
     runs-on: ubuntu-18.04
@@ -164,9 +110,9 @@ jobs:
             meson setup build_meson .
             cd build_meson
             ninja
-            cp "subprojects/hidapi_build_cmake/libhidapi_libusb.so" "/artifacts/libhidapi_libusb.so"
             cp "subprojects/hidapi_build_cmake/libhidapi_hidraw.so" "/artifacts/libhidapi_hidraw.so"
-            
+            echo `which libudev`
+            cp `which libudev` "/artifacts/libudev.so"
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
@@ -181,8 +127,8 @@ jobs:
       - name: Check artifacts
         uses: andstor/file-existence-action@v1
         with:
-          files: "artifacts/libhidapi_libusb.so, \
-                  artifacts/libhidapi_hidraw.so"
+                  "artifacts/libhidapi_hidraw.so"
+                  "artifacts/libudev.so"
           allow_failure: true
           
           
