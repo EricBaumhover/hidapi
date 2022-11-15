@@ -124,10 +124,11 @@ jobs:
           name: hidapi-linux-arm64
           path: artifacts/
           retention-days: ${{ (github.event_name == 'pull_request' || github.ref_name != 'master') && 7 || 90 }}
+          
       - name: Check artifacts
         uses: andstor/file-existence-action@v1
         with:
-                  "artifacts/libhidapi_hidraw.so"
+          files:  "artifacts/libhidapi_hidraw.so"
                   "artifacts/libudev.so"
           allow_failure: true
           
