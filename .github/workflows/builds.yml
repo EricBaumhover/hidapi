@@ -127,8 +127,8 @@ jobs:
       - name: Check artifacts
         uses: andstor/file-existence-action@v1
         with:
-          files: "artifacts/libhidapi_libusb.so, \
-                  artifacts/libhidapi_hidraw.so"
+          files: "${PWD}/artifacts/libhidapi_libusb.so, \
+                  ${PWD}/artifacts/libhidapi_hidraw.so"
           allow_failure: true
         
   ubuntu-cmake-x64:
