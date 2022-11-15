@@ -99,7 +99,7 @@ jobs:
             
           install: |
             apt-get update -q -y
-            apt-get install -q -y libudev-dev libusb-1.0-0-dev python3-pip ninja-build git cmake
+            apt-get install -q -y libudev-dev libusb-1.0-0-dev python3-pip ninja-build git cmake pkg-config
             cd ~
             pip3 install meson
             
