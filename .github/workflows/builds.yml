@@ -107,7 +107,6 @@ jobs:
             rm -rf build install
             cmake -B build/shared -S . -DCMAKE_INSTALL_PREFIX=install/shared -DHIDAPI_BUILD_HIDTEST=ON
             cmake -B build/static -S . -DCMAKE_INSTALL_PREFIX=install/static -DBUILD_SHARED_LIBS=FALSE -DHIDAPI_BUILD_HIDTEST=ON
-            cd build/shared
             make install
             meson setup build_meson .
             cd build_meson
