@@ -78,7 +78,7 @@ jobs:
 
   ubuntu-cmake-aarch64:
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     
     steps:
       - uses: actions/checkout@v2.1.0
@@ -87,7 +87,7 @@ jobs:
         id: runcmd
         with:
           arch: aarch64
-          distro: ubuntu20.04
+          distro: ubuntu18.04
           
           shell: /bin/sh
           
@@ -106,7 +106,6 @@ jobs:
           run: |
             rm -rf build install
             cmake -B build/shared -S . -DCMAKE_INSTALL_PREFIX=install/shared -DHIDAPI_BUILD_HIDTEST=ON
-            cmake -B build/static -S . -DCMAKE_INSTALL_PREFIX=install/static -DBUILD_SHARED_LIBS=FALSE -DHIDAPI_BUILD_HIDTEST=ON
             make install
             meson setup build_meson .
             cd build_meson
