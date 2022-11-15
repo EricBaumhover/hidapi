@@ -104,7 +104,6 @@ jobs:
             pip3 install meson
             
           run: |
-            cd hidapi
             rm -rf build install
             cmake -B build/shared -S hidapi -DCMAKE_INSTALL_PREFIX=install/shared -DHIDAPI_BUILD_HIDTEST=ON
             cmake -B build/static -S hidapi -DCMAKE_INSTALL_PREFIX=install/static -DBUILD_SHARED_LIBS=FALSE -DHIDAPI_BUILD_HIDTEST=ON
