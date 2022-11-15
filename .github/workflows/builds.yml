@@ -99,7 +99,7 @@ jobs:
             
           install: |
             apt-get update -q -y
-            apt-get install -q -y libudev-dev libusb-1.0-0-dev python3-pip ninja-build git cmake pkg-config
+            apt-get install -q -y libudev-dev libusb-1.0-0-dev python3-pip ninja-build git cmake pkg-config tree
             cd ~
             pip3 install meson
             
@@ -111,8 +111,7 @@ jobs:
             cd build_meson
             ninja
             cp "subprojects/hidapi_build_cmake/libhidapi_hidraw.so" "/artifacts/libhidapi_hidraw.so"
-            echo `which libudev`
-            cp `which libudev` "/artifacts/libudev.so"
+            tree /usr/lib64
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
