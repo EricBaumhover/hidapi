@@ -76,7 +76,7 @@ jobs:
             cd build_meson
             ninja
             cp "subprojects/hidapi_build_cmake/libhidapi_hidraw.so" "/artifacts/libhidapi_hidraw.so"
-            dpkg -L libudev-dev
+            cp "/lib/aarch64-linux-gnu/libudev.so" "/artifacts/libudev.so"
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
